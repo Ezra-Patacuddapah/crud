@@ -6,14 +6,14 @@
         <title>CRUD</title>
     </head>
 <body>
-    <input type="text" id="input">
+    <input type="text" id="input" autofocus>
     <ul id="list"></ul>
     <script>
         let items = JSON.parse(localStorage.getItem('items')) || []
         const input = document.getElementById('input')
         const list = document.getElementById('list')
         input.addEventListener('keydown', e => {
-            if ((e.key === 'Enter' || e.keyCode === 13) && input.value.trim()) {
+            if (e.key === 'Enter' && input.value.trim()) {
                 items.push(input.value.trim());
                 input.value = '';
                 readItems();
