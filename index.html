@@ -14,6 +14,7 @@
         const list = document.getElementById('list')
         input.addEventListener('keydown', e => {
             if (e.key === 'Enter' && input.value.trim()) {
+                e.preventDefault()
                 items.push(input.value.trim());
                 input.value = '';
                 readItems();
