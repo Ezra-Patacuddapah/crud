@@ -13,8 +13,7 @@
         const input = document.getElementById('input')
         const list = document.getElementById('list')
         input.addEventListener('keydown', e => {
-            if (e.key === 'Enter' && input.value.trim()) {
-                e.preventDefault()
+            if ((e.key === 'Enter' || e.keyCode === 13) && input.value.trim()) {
                 items.push(input.value.trim());
                 input.value = '';
                 readItems();
