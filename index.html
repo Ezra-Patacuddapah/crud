@@ -7,7 +7,7 @@
     </head>
 <body>
     <input type="text" id="input">
-    <div id="list"></div>
+    <ul id="list"></ul>
     <script>
         let items = JSON.parse(localStorage.getItem('items')) || []
         const input = document.getElementById('input')
@@ -21,13 +21,13 @@
         });
 		function readItems() {
 			list.innerHTML = items.map((item, index) => `
-				<div>
+				<li>
 					<span contenteditable onblur="updateItem(${index}, this)" 
 						  onkeydown="event.key === 'Enter' && updateItem(${index}, this)">
 						${item}
 					</span>
 					<button onclick="deleteItem(${index})">&times;</button>
-				</div>
+				</li>
 			`).join('');
 			localStorage.setItem('items', JSON.stringify(items));
 		}
