@@ -22,7 +22,7 @@
 		function readItems() {
 			list.innerHTML = items.map((item, index) => `
 				<li>
-					<span contenteditable onblur="updateItem(${index}, this)" 
+					<span contenteditable onblur="updateItem(${index}, this)" oninput="updateItem(${index}, this)"
 						  onkeydown="event.key === 'Enter' && updateItem(${index}, this)">
 						${item}
 					</span>
