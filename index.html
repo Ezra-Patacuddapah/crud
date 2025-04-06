@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <input type="text" id="input">
+    <ul id="list"></ul>
+    <script>
+        let items = JSON.parse(localStorage.getItem('items')) || []
+        const input = document.getElementById('input')
+        const list = document.getElementById('list')
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && input.value.trim()) {
+                items.push(input.value.trim());
+                input.value = '';
+                readItems();
+            }
+        });
+		function readItems() {
+			list.innerHTML = items.map((item, index) => `
+				<li>
+					<span contenteditable onblur="updateItem(${index}, this)" 
+						  onkeydown="event.key === 'Enter' && updateItem(${index}, this)">
+						${item}
+					</span>
+					<button onclick="deleteItem(${index})">&times;</button>
+				</li>
+			`).join('');
+			localStorage.setItem('items', JSON.stringify(items));
+		}
+        function updateItem(index, element) {
+            const newText = element.textContent.trim();
+            if (newText) items[index] = newText;
+            else element.textContent = items[index];
+            readItems();
+        }
+        function deleteItem(index) {
+            items.splice(index, 1);
+            readItems();
+        }
+        readItems();
+    </script>
+</body>
+</html>
